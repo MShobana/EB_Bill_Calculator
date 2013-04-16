@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last month units"
+            android:id="@+id/labelFromUnit" android:layout_gravity="left|center_vertical"/>
+    <EditText
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textFromUnit" android:layout_gravity="left|center_vertical"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current month units"
+            android:id="@+id/labelToUnits" android:layout_gravity="left|center_vertical"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textToUnits"/>
+    <Button
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:id="@+id/submit" android:layout_gravity="center" android:width="200dp"/>
+    <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/labelResult" android:layout_gravity="left|center_vertical"/>
+</LinearLayout>
+
