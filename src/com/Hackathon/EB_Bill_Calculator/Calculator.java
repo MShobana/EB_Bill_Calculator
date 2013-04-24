@@ -15,36 +15,57 @@ public class Calculator extends Activity {
     private Button VWsubmit;
     private EditText VWfromUnits;
     private EditText VWtoUnits;
+    private Integer fromUnits;
+    private Integer toUnits;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        VWsubmit = (Button) findViewById(R.id.submit);
-        VWfromUnits = (EditText) findViewById(R.id.textFromUnit);
-        VWtoUnits = (EditText) findViewById(R.id.textToUnits);
+        InitializeViewElements();
 
         VWsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                //get view inputs
-                Integer fromUnits = Integer.valueOf(VWfromUnits.getText().toString());
-                Integer toUnits = Integer.valueOf(VWtoUnits.getText().toString());
-
-                //calculate bill
-                int totalUnits = toUnits - fromUnits;
-                JSONArray slabRatesJson = getSlabRatesJson();
-                float cost = getBill(slabRatesJson, totalUnits);
-
-                //display bill
-                Toast bill = Toast.makeText(view.getContext(), String.valueOf(cost), 1000);
-                bill.show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                getInputUnits();
+                validateInput(view);
+                float cost = getBill(fromUnits, toUnits);
+                toastShow(view, String.valueOf(cost));
+                }
+                catch (Exception e) {
+                toastShow(view, "Invalid input");
                 }
             }
         });
+    }
+
+    private void InitializeViewElements() {
+        VWsubmit = (Button) findViewById(R.id.submit);
+        VWfromUnits = (EditText) findViewById(R.id.textFromUnit);
+        VWtoUnits = (EditText) findViewById(R.id.textToUnits);
+    }
+
+    private void getInputUnits() {
+        fromUnits = Integer.valueOf(VWfromUnits.getText().toString());
+        toUnits = Integer.valueOf(VWtoUnits.getText().toString());
+    }
+
+    private float getBill(Integer fromUnits, Integer toUnits) throws JSONException {
+        int totalUnits = toUnits - fromUnits;
+        JSONArray slabRatesJson = getSlabRatesJson();
+        return calculateCost(slabRatesJson, totalUnits);
+    }
+
+    private void validateInput(View view) {
+        if(fromUnits<0 || toUnits<0 || fromUnits>toUnits){
+            toastShow(view,"Invalid input");
+        }
+    }
+
+    private void toastShow(View view,String displayText) {
+        Toast bill = Toast.makeText(view.getContext(),displayText, 1000);
+        bill.show();
     }
 
     private JSONArray getSlabRatesJson() throws JSONException {
@@ -54,20 +75,21 @@ public class Calculator extends Activity {
         return slabRatesJson;
     }
 
-    float getBill(JSONArray slabs, int units) throws JSONException {
+    float calculateCost(JSONArray slabs, int units) throws JSONException {
         float billAmount = 0;
-        float slabLimit = 0;
+        float slabLimit;
         for(int i=0;i<slabs.length();i++){
-           JSONObject slab = (JSONObject)slabs.get(i);
+           JSONObject slab = slabs.getJSONObject(i);
            boolean lastSlab = i == slabs.length() - 1;
 
-           if(!lastSlab){
+           if(lastSlab)
+            slabLimit=units;
+           else
             slabLimit= getFloatValueForStringJson(slab, "slab");
-           }
-           if(lastSlab || units<slabLimit){
+
+           if(units<=slabLimit){
                 float fixedAmount = getFloatValueForStringJson(slab, "fixed");
                 JSONArray slots = slab.getJSONArray("slots");
-
                 billAmount = fixedAmount+ calculateSlabRate(slots, units);
                 return billAmount;
            }
@@ -80,22 +102,22 @@ public class Calculator extends Activity {
     }
 
     private int calculateSlabRate(JSONArray slots, int units) throws JSONException {
-        int totalSlabAmount=0;
-        float lowerRange=0;
+       int totalSlabAmount=0;
+       float lowerRange=0;
        for(int i=0;i<slots.length();i++){
            JSONObject slot = slots.getJSONObject(i);
            float upperRange;
-           if(i==slots.length()-1){
+           boolean lastSlot = i == slots.length() - 1;
+
+           if(lastSlot)
                upperRange=units;
-           }
-           else{
-           upperRange = getFloatValueForStringJson(slot, "range");
-           }
+           else
+               upperRange = getFloatValueForStringJson(slot, "range");
+
            float slabRate = getFloatValueForStringJson(slot, "cost");
            totalSlabAmount+=(upperRange-lowerRange)*slabRate;
            lowerRange=upperRange;
        }
-
         return totalSlabAmount;
     }
 
