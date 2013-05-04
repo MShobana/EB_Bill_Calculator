@@ -17,13 +17,15 @@ public class Calculator extends Activity {
     private EditText VWtoUnits;
     private Integer fromUnits;
     private Integer toUnits;
+    private Button VWUpdate;
+    private BillDetailsDataStore billDetailsDataStore;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         InitializeViewElements();
-
+        billDetailsDataStore = new BillDetailsDataStore(getApplicationContext());
         VWsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,12 +40,21 @@ public class Calculator extends Activity {
                 }
             }
         });
+
+        VWUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                billDetailsDataStore.insert(getSlabRatesString());
+            }
+        });
     }
 
     private void InitializeViewElements() {
         VWsubmit = (Button) findViewById(R.id.submit);
         VWfromUnits = (EditText) findViewById(R.id.textFromUnit);
         VWtoUnits = (EditText) findViewById(R.id.textToUnits);
+        VWUpdate=(Button) findViewById(R.id.update);
+
     }
 
     private void getInputUnits() {
@@ -69,8 +80,7 @@ public class Calculator extends Activity {
     }
 
     private JSONArray getSlabRatesJson() throws JSONException {
-
-        String slabRatesString = getSlabRatesString();
+        String slabRatesString = billDetailsDataStore.getBillDetailsString();
         JSONArray slabRatesJson=new JSONArray(slabRatesString);
         return slabRatesJson;
     }
@@ -83,14 +93,14 @@ public class Calculator extends Activity {
            boolean lastSlab = i == slabs.length() - 1;
 
            if(lastSlab)
-            slabLimit=units;
+            slabLimit= units;
            else
             slabLimit= getFloatValueForStringJson(slab, "slab");
 
            if(units<=slabLimit){
                 float fixedAmount = getFloatValueForStringJson(slab, "fixed");
                 JSONArray slots = slab.getJSONArray("slots");
-                billAmount = fixedAmount+ calculateSlabRate(slots, units);
+                billAmount = fixedAmount + calculateSlabRate(slots, units);
                 return billAmount;
            }
         }
@@ -101,8 +111,8 @@ public class Calculator extends Activity {
         return Float.parseFloat(jsonObject.getString(stringJson));
     }
 
-    private int calculateSlabRate(JSONArray slots, int units) throws JSONException {
-       int totalSlabAmount=0;
+    private float calculateSlabRate(JSONArray slots, int units) throws JSONException {
+       float totalSlabAmount=0;
        float lowerRange=0;
        for(int i=0;i<slots.length();i++){
            JSONObject slot = slots.getJSONObject(i);
@@ -170,7 +180,7 @@ public class Calculator extends Activity {
                 "                \"cost\": \"4\"\n" +
                 "            },\n" +
                 "            {\n" +
-                "                \"range\": \"x\",\n" +
+                "                \"range\": \"xx\",\n" +
                 "                \"cost\": \"5.75\"\n" +
                 "            }\n" +
                 "        ]\n" +
