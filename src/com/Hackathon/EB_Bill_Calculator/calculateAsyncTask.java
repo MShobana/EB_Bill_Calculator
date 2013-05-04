@@ -12,37 +12,31 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class calculateAsyncTask extends AsyncTask<Object,Void, Integer>{
+public class calculateAsyncTask extends AsyncTask<String,Void, String>{
 
-    private int responseCode;
-    private Context context;
-    private StringBuilder response=new StringBuilder();
+    private ICallback callback;
+
+    public calculateAsyncTask(ICallback callback,Context context) {
+        this.callback = callback;
+    }
 
     @Override
-    protected Integer doInBackground(Object... url) {
+    protected String doInBackground(String... url) {
         try {
-            URL getUrl = new URL((String)url[0]);
+            URL getUrl = new URL(url[0]);
             HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection();
             connection.setConnectTimeout(50000);
             connection.setReadTimeout(50000);
             connection.setDoInput(true);
             connection.setRequestMethod("GET");
-            responseCode = connection.getResponseCode();
             BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()),8192);
-            String strLine = null;
-            while ((strLine = input.readLine()) != null)
-            {
-                response.append(strLine);
-            }
-            String responseString = response.toString();
-            JSONObject responseJson = new JSONObject(responseString);
-            Integer cost = responseJson.getInt("cost");
-            context=(Context)url[1];
-            return cost;
+            String responseString = input.readLine();
+            return responseString;
         }
         catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         catch (Exception e){
@@ -52,8 +46,7 @@ public class calculateAsyncTask extends AsyncTask<Object,Void, Integer>{
     }
 
     @Override
-    protected void onPostExecute(Integer cost) {
-        Toast toast = Toast.makeText(context, cost.toString(), 1000);
-        toast.show();
+    protected void onPostExecute(String responseString) {
+        callback.OnTaskComplete(responseString);
     }
 }

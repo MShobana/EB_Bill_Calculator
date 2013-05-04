@@ -31,4 +31,11 @@ public class BillDetailsDataStore {
         String billDetails = cursor.getString(jsonColumnIndex);
         return billDetails;
     }
+
+    public int getCount() {
+        Cursor cursor = writableDatabase.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME, null);
+        cursor.moveToFirst();
+        int rowsCount = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
+        return rowsCount;
+    }
 }

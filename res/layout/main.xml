@@ -5,14 +5,23 @@
               android:layout_height="fill_parent"
         >
     <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/labelResult" android:layout_gravity="left|center_vertical"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/update" android:layout_gravity="right|center_vertical" android:layout_marginLeft="19dp"/>
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Last month units"
             android:id="@+id/labelFromUnit" android:layout_gravity="left|center_vertical"/>
     <EditText
-            android:layout_width="325dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textFromUnit" android:layout_gravity="left|center_vertical"/>
+            android:id="@+id/textFromUnit"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,20 +30,11 @@
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textToUnits"/>
+            android:id="@+id/textToUnits" android:layout_gravity="center"/>
     <Button
             android:layout_width="133dp"
             android:layout_height="wrap_content"
             android:text="Calculate"
             android:id="@+id/submit" android:layout_gravity="center" android:width="200dp"/>
-    <TextView
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/labelResult" android:layout_gravity="left|center_vertical"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update"
-            android:id="@+id/update" android:layout_gravity="left|center_vertical" android:layout_marginLeft="19dp"/>
 </LinearLayout>
 

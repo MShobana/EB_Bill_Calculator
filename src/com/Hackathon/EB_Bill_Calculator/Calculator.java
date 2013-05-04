@@ -1,6 +1,7 @@
 package com.Hackathon.EB_Bill_Calculator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Calculator extends Activity {
+public class Calculator extends Activity implements ICallback{
 
     private Button VWsubmit;
     private EditText VWfromUnits;
@@ -19,6 +20,7 @@ public class Calculator extends Activity {
     private Integer toUnits;
     private Button VWUpdate;
     private BillDetailsDataStore billDetailsDataStore;
+    private ICallback activityClassObject;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,11 @@ public class Calculator extends Activity {
         setContentView(R.layout.main);
         InitializeViewElements();
         billDetailsDataStore = new BillDetailsDataStore(getApplicationContext());
+        activityClassObject=this;
+        int rowsCount = billDetailsDataStore.getCount();
+        if(rowsCount==0){
+           updateBillRates(this.getApplicationContext());
+        }
         VWsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,9 +51,14 @@ public class Calculator extends Activity {
         VWUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                billDetailsDataStore.insert(getSlabRatesString());
+                updateBillRates(view.getContext());
             }
         });
+    }
+
+    private void updateBillRates(Context context) {
+        String url = "http://guarded-badlands-3707.herokuapp.com/";
+        new calculateAsyncTask(activityClassObject,context).execute(url);
     }
 
     private void InitializeViewElements() {
@@ -131,63 +143,10 @@ public class Calculator extends Activity {
         return totalSlabAmount;
     }
 
-    private String getSlabRatesString() {
-        String slabRates="[\n" +
-                "    {\n" +
-                "        \"slab\": \"100\",\n" +
-                "        \"fixed\": \"20\",\n" +
-                "        \"slots\": [\n" +
-                "            {\n" +
-                "                \"range\": \"100\",\n" +
-                "                \"cost\": \"1\"\n" +
-                "            }\n" +
-                "        ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "        \"slab\": \"200\",\n" +
-                "        \"fixed\": \"20\",\n" +
-                "        \"slots\": [\n" +
-                "            {\n" +
-                "                \"range\": \"200\",\n" +
-                "                \"cost\": \"1.5\"\n" +
-                "            }\n" +
-                "        ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "        \"slab\": \"500\",\n" +
-                "        \"fixed\": \"30\",\n" +
-                "        \"slots\": [\n" +
-                "            {\n" +
-                "                \"range\": \"200\",\n" +
-                "                \"cost\": \"2\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "                \"range\": \"500\",\n" +
-                "                \"cost\": \"3\"\n" +
-                "            }\n" +
-                "        ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "        \"slab\": \"max\",\n" +
-                "        \"fixed\": \"40\",\n" +
-                "        \"slots\": [\n" +
-                "            {\n" +
-                "                \"range\": \"200\",\n" +
-                "                \"cost\": \"3\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "                \"range\": \"500\",\n" +
-                "                \"cost\": \"4\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "                \"range\": \"xx\",\n" +
-                "                \"cost\": \"5.75\"\n" +
-                "            }\n" +
-                "        ]\n" +
-                "    }\n" +
-                "]";
-        return slabRates;
-    }
 
+    @Override
+    public void OnTaskComplete(String response) {
+        billDetailsDataStore.insert(response);
+    }
 }
 
