@@ -26,24 +26,23 @@ public class Calculator extends Activity implements ICallback{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        InitializeViewElements();
-        billDetailsDataStore = new BillDetailsDataStore(getApplicationContext());
+        CreateViewElements();
+        createDatastore();
         activityClassObject=this;
-        int rowsCount = billDetailsDataStore.getCount();
-        if(rowsCount==0){
-           updateBillRates(this.getApplicationContext());
-        }
+        InitializeDatabase();
+        InitializeViewElements();
+
         VWsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                getInputUnits();
-                validateInput(view);
-                float cost = getBill(fromUnits, toUnits);
-                toastShow(view, String.valueOf(cost));
-                }
-                catch (Exception e) {
-                toastShow(view, "Invalid input");
+                    getInputUnits();
+                    validateInput(view);
+                    float cost = getBill(fromUnits, toUnits);
+                    billDetailsDataStore.updateFromUnits(toUnits);
+                    toastShow(view, String.valueOf(cost));
+                } catch (Exception e) {
+                    toastShow(view, "Invalid input");
                 }
             }
         });
@@ -56,17 +55,36 @@ public class Calculator extends Activity implements ICallback{
         });
     }
 
+    private void InitializeViewElements() {
+        int rowsCount = billDetailsDataStore.getCount();
+        if(rowsCount>0){
+            int fromUnits = billDetailsDataStore.getFromUnitsFromDB();
+            if(fromUnits!=0)
+            VWfromUnits.setText(Integer.toString(fromUnits));
+        }
+    }
+
+    private void InitializeDatabase() {
+        int rowsCount = billDetailsDataStore.getCount();
+        if(rowsCount==0){
+           updateBillRates(this.getApplicationContext());
+        }
+    }
+
+    private void createDatastore() {
+        billDetailsDataStore = new BillDetailsDataStore(getApplicationContext());
+    }
+
     private void updateBillRates(Context context) {
         String url = "http://guarded-badlands-3707.herokuapp.com/";
         new calculateAsyncTask(activityClassObject,context).execute(url);
     }
 
-    private void InitializeViewElements() {
+    private void CreateViewElements() {
         VWsubmit = (Button) findViewById(R.id.submit);
         VWfromUnits = (EditText) findViewById(R.id.textFromUnit);
         VWtoUnits = (EditText) findViewById(R.id.textToUnits);
         VWUpdate=(Button) findViewById(R.id.update);
-
     }
 
     private void getInputUnits() {

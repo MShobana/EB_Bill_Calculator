@@ -8,6 +8,7 @@ public class BillDetailsDB extends SQLiteOpenHelper{
     public static final String TABLE_NAME = "EBBillDetails";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_INPUT_JSON = "detailsJson";
+    public static final String COLUMN_FROM_UNITS = "fromUnits";
 
     public BillDetailsDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -17,7 +18,8 @@ public class BillDetailsDB extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY, "
-                + COLUMN_INPUT_JSON + " TEXT)");
+                + COLUMN_INPUT_JSON + " TEXT,"
+                + COLUMN_FROM_UNITS + " INTEGER DEFAULT 0)");
     }
 
     @Override

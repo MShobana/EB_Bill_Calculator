@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class BillDetailsDataStore {
     private static final String DATABASE_NAME = "bill_details.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 3;
     private final SQLiteDatabase writableDatabase;
 
     public BillDetailsDataStore(Context context) {
@@ -32,10 +32,23 @@ public class BillDetailsDataStore {
         return billDetails;
     }
 
+    public int getFromUnitsFromDB() {
+        Cursor cursor = writableDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        cursor.moveToFirst();
+        int ColumnIndex = cursor.getColumnIndex(COLUMN_FROM_UNITS);
+        int fromUnits = cursor.getInt(ColumnIndex);
+        return fromUnits;
+    }
     public int getCount() {
         Cursor cursor = writableDatabase.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME, null);
         cursor.moveToFirst();
         int rowsCount = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
         return rowsCount;
+    }
+
+    public void updateFromUnits(Integer toUnits) {
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(COLUMN_FROM_UNITS,toUnits);
+        writableDatabase.update(TABLE_NAME,contentValues,COLUMN_ID + " = 1",null);
     }
 }
