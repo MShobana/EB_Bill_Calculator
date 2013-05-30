@@ -27,21 +27,22 @@ public class Calculator extends Activity implements ICallback{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         CreateViewElements();
-        createDatastore();
-        activityClassObject=this;
+        CreateDatastore();
         InitializeDatabase();
         InitializeViewElements();
+        activityClassObject=this;
 
         VWsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    getInputUnits();
+                    setFieldsFromView();
                     validateInput(view);
                     float cost = getBill(fromUnits, toUnits);
                     billDetailsDataStore.updateFromUnits(toUnits);
                     toastShow(view, String.valueOf(cost));
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     toastShow(view, "Invalid input");
                 }
             }
@@ -71,7 +72,7 @@ public class Calculator extends Activity implements ICallback{
         }
     }
 
-    private void createDatastore() {
+    private void CreateDatastore() {
         billDetailsDataStore = new BillDetailsDataStore(getApplicationContext());
     }
 
@@ -87,7 +88,7 @@ public class Calculator extends Activity implements ICallback{
         VWUpdate=(Button) findViewById(R.id.update);
     }
 
-    private void getInputUnits() {
+    private void setFieldsFromView() {
         fromUnits = Integer.valueOf(VWfromUnits.getText().toString());
         toUnits = Integer.valueOf(VWtoUnits.getText().toString());
     }
