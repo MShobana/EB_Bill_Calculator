@@ -1,12 +1,9 @@
 package com.Hackathon.EB_Bill_Calculator;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +18,7 @@ public class Calculator extends Activity implements ICallback{
     private Button VWUpdate;
     private BillDetailsDataStore billDetailsDataStore;
     private ICallback activityClassObject;
+    private Spinner VWState;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,24 +49,59 @@ public class Calculator extends Activity implements ICallback{
         VWUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateBillRates(view.getContext());
+                updateBillRates();
+            }
+        });
+
+        VWState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedState;
+                selectedState = (String)(VWState.getSelectedItem());
+                billDetailsDataStore.unselectOldState();
+                billDetailsDataStore.updateSelectedState(selectedState);
+                ClearInputElements();
+                InitializeFromUnits();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //To change body of implemented methods use File | Settings | File Templates.
             }
         });
     }
 
+    private void ClearInputElements() {
+        VWfromUnits.setText("");
+        VWtoUnits.setText("");
+    }
+
     private void InitializeViewElements() {
-        int rowsCount = billDetailsDataStore.getCount();
-        if(rowsCount>0){
-            int fromUnits = billDetailsDataStore.getFromUnitsFromDB();
+        InitiazeStatesSpinner();
+        InitializeFromUnits();
+    }
+    private void InitializeFromUnits() {
+            int fromUnits = billDetailsDataStore.getFromUnitsForSelectedState();
             if(fromUnits!=0)
             VWfromUnits.setText(Integer.toString(fromUnits));
-        }
+    }
+
+    private void updateBillRates() {
+        String selectedState = billDetailsDataStore.getSelectedState();
+        String url = "http://guarded-badlands-3707.herokuapp.com/"+selectedState;
+        new calculateAsyncTask(activityClassObject).execute(url);
+    }
+
+    private void InitiazeStatesSpinner() {
+     ArrayAdapter<CharSequence> statesArray= ArrayAdapter.createFromResource(this,R.array.States, android.R.layout.simple_spinner_item);
+     statesArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+     VWState.setAdapter(statesArray);
     }
 
     private void InitializeDatabase() {
         int rowsCount = billDetailsDataStore.getCount();
         if(rowsCount==0){
-           updateBillRates(this.getApplicationContext());
+           updateBillRates();
         }
     }
 
@@ -76,16 +109,12 @@ public class Calculator extends Activity implements ICallback{
         billDetailsDataStore = new BillDetailsDataStore(getApplicationContext());
     }
 
-    private void updateBillRates(Context context) {
-        String url = "http://guarded-badlands-3707.herokuapp.com/";
-        new calculateAsyncTask(activityClassObject,context).execute(url);
-    }
-
     private void CreateViewElements() {
         VWsubmit = (Button) findViewById(R.id.submit);
         VWfromUnits = (EditText) findViewById(R.id.textFromUnit);
         VWtoUnits = (EditText) findViewById(R.id.textToUnits);
         VWUpdate=(Button) findViewById(R.id.update);
+        VWState=(Spinner) findViewById(R.id.spinner);
     }
 
     private void setFieldsFromView() {
@@ -106,7 +135,7 @@ public class Calculator extends Activity implements ICallback{
     }
 
     private void toastShow(View view,String displayText) {
-        Toast bill = Toast.makeText(view.getContext(),displayText, 1000);
+        Toast bill = Toast.makeText(view.getContext(), displayText, 1000);
         bill.show();
     }
 
@@ -165,7 +194,8 @@ public class Calculator extends Activity implements ICallback{
 
     @Override
     public void OnTaskComplete(String response) {
-        billDetailsDataStore.insert(response);
+        if(response!=null)
+        billDetailsDataStore.updateBillDetailsJson(response);
     }
 }
 

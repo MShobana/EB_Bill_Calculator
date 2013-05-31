@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <resources>
+   <string-array name="States">
+    <item>Uttar Pradesh</item>
+    <item>Maharashtra</item>
+    <item>Bihar</item>
+    <item>West Bengal</item>`
+    <item>Andhra Pradesh</item>`
+    <item>Madhya Pradesh</item>`
+    <item>Tamil Nadu</item>`
+    <item>Rajasthan</item>`
+    <item>Karnataka</item>`
+    <item>Gujarat</item>`
+    <item>Odisha</item>`
+    <item>Kerala</item>`
+    <item>Jharkhand</item>`
+    <item>Assam</item>`
+    <item>Punjab</item>`
+    <item>Haryana</item>`
+    <item>Chhattisgarh</item>`
+    <item>Jammu and Kashmir</item>`
+    <item>Uttarakhand</item>`
+    <item>Himachal Pradesh</item>`
+    <item>Tripura</item>`
+    <item>Meghalaya</item>`
+    <item>Manipur</item>`
+    <item>Nagaland</item>`
+    <item>Goa</item>`
+    <item>Arunachal Pradesh</item>`
+    <item>Mizoram</item>`
+    <item>Sikkim</item>`
+    <item>Delhi</item>`
+    <item>Puducherry</item>`
+    <item>Chandigarh</item>`
+    <item>Andaman and Nicobar Islands</item>`
+    <item>Daman and Diu</item>`
+    <item>Dadra and Nagar Haveli</item>`
+    <item>Lakshadweep</item>`
+   </string-array>
+
+   <string-array name="billJsonArray">
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+     <item>[{"slab": "100","fixed": "20","slots": [{"range": "100","cost": "1"}]},{"slab": "200","fixed": "20","slots": [{"range": "200","cost": "1.5"}]},{"slab": "500","fixed": "30","slots": [{"range": "200","cost": "2"},{"range": "500","cost": "3"}]},{"slab": "max","fixed": "40","slots": [{"range": "200","cost": "3"},{"range": "500","cost": "4"},{"range": "x","cost": "5.75"}]}]</item>`
+   </string-array>
+   </resources>

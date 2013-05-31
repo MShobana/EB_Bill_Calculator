@@ -2,9 +2,6 @@ package com.Hackathon.EB_Bill_Calculator;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,11 +9,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class calculateAsyncTask extends AsyncTask<String,Void, String>{
+public class calculateAsyncTask extends AsyncTask<String, Void, String>{
 
     private ICallback callback;
 
-    public calculateAsyncTask(ICallback callback,Context context) {
+    public calculateAsyncTask(ICallback callback) {
         this.callback = callback;
     }
 

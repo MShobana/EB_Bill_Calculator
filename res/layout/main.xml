@@ -16,6 +16,15 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="State:"
+            android:id="@+id/textView" android:layout_gravity="left|center_vertical"/>
+    <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Last month units"
             android:id="@+id/labelFromUnit" android:layout_gravity="left|center_vertical"/>
     <EditText
