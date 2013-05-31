@@ -22,7 +22,6 @@ public class calculateAsyncTask extends AsyncTask<String,Void, String>{
 
     @Override
     protected String doInBackground(String... url) {
-        String responseString = null;
         try {
             URL getUrl = new URL(url[0]);
             HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection();
@@ -31,7 +30,8 @@ public class calculateAsyncTask extends AsyncTask<String,Void, String>{
             connection.setDoInput(true);
             connection.setRequestMethod("GET");
             BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()),8192);
-            responseString = input.readLine();
+            String responseString = input.readLine();
+            return responseString;
         }
         catch (MalformedURLException e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class calculateAsyncTask extends AsyncTask<String,Void, String>{
         catch (Exception e){
             e.printStackTrace();
         }
-        return responseString;
+        return null;
     }
 
     @Override
