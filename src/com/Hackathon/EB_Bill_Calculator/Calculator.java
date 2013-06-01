@@ -155,8 +155,8 @@ public class Calculator extends Activity implements ICallback {
     }
 
     private void toastShow(Context context,String displayText) {
-        Toast bill = Toast.makeText(context, displayText, 1000);
-        bill.show();
+        Toast toast = Toast.makeText(context, displayText, 1000);
+        toast.show();
     }
 
     private JSONArray getSlabRatesJson() throws JSONException {

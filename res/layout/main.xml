@@ -6,12 +6,9 @@
         >
     <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/titleWithState" android:layout_gravity="center"/>
-    <TextView
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/labelResult" android:layout_gravity="left|center_vertical"/>
+            android:layout_height="40dp"
+            android:id="@+id/titleWithState" android:layout_gravity="center" android:textStyle="bold"
+            android:textColor="#ff9482" android:text="gdgdfg" android:layout_marginTop="5dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
