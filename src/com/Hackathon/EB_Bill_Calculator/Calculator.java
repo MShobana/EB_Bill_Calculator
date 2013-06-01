@@ -114,9 +114,13 @@ public class Calculator extends Activity implements ICallback {
 
     private void updateBillRates() {
         String selectedState = billDetailsDataStore.getSelectedState();
-        String url = "http://guarded-badlands-3707.herokuapp.com/"+selectedState;
+        String selectedStateWithoutSpace = removeSpace(selectedState);
+        String url = "http://guarded-badlands-3707.herokuapp.com/"+selectedStateWithoutSpace;
         new calculateAsyncTask(activityClassObject).execute(url);
-        toastShow(this.getApplicationContext(),"Bill rates updated for "+selectedState);
+    }
+
+    private String removeSpace(String selectedState) {
+        return selectedState.replace(" ","");
     }
 
     private void InitializeDatabase() {
@@ -214,8 +218,13 @@ public class Calculator extends Activity implements ICallback {
 
     @Override
     public void OnTaskComplete(String response) {
-        if(response!=null)
-        billDetailsDataStore.updateBillDetailsJson(response);
+        String selectedState = billDetailsDataStore.getSelectedState();
+        String message="Error in updating bill rates for";
+        if(response!=null){
+         billDetailsDataStore.updateBillDetailsJson(response);
+         message="Bill rates updated for";
+        }
+        toastShow(this.getApplicationContext(),message + " " + selectedState);
     }
 }
 
