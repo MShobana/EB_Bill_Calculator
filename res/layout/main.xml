@@ -5,23 +5,13 @@
               android:layout_height="fill_parent"
         >
     <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleWithState" android:layout_gravity="center"/>
+    <TextView
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:id="@+id/labelResult" android:layout_gravity="left|center_vertical"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update"
-            android:id="@+id/update" android:layout_gravity="right|center_vertical" android:layout_marginLeft="19dp"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="State:"
-            android:id="@+id/textView" android:layout_gravity="left|center_vertical"/>
-    <Spinner
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

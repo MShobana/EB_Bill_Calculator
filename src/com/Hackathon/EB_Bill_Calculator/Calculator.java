@@ -1,24 +1,28 @@
 package com.Hackathon.EB_Bill_Calculator;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Calculator extends Activity implements ICallback{
+public class Calculator extends Activity implements ICallback {
 
-    private Button VWsubmit;
-    private EditText VWfromUnits;
-    private EditText VWtoUnits;
+    private Button VWSubmit;
+    private EditText VWFromUnits;
+    private EditText VWToUnits;
     private Integer fromUnits;
     private Integer toUnits;
-    private Button VWUpdate;
     private BillDetailsDataStore billDetailsDataStore;
     private ICallback activityClassObject;
-    private Spinner VWState;
+    private View VWTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class Calculator extends Activity implements ICallback{
         InitializeViewElements();
         activityClassObject=this;
 
-        VWsubmit.setOnClickListener(new View.OnClickListener() {
+        VWSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -38,64 +42,81 @@ public class Calculator extends Activity implements ICallback{
                     validateInput(view);
                     float cost = getBill(fromUnits, toUnits);
                     billDetailsDataStore.updateFromUnits(toUnits);
-                    toastShow(view, String.valueOf(cost));
-                }
-                catch (Exception e) {
-                    toastShow(view, "Invalid input");
+                    toastShow(view.getContext(), String.valueOf(cost));
+                } catch (Exception e) {
+                    toastShow(view.getContext(), "Invalid input");
                 }
             }
         });
+    }
 
-        VWUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.layout.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.state:
+                showStatesDialog();
+                break;
+            case R.id.update:
                 updateBillRates();
-            }
-        });
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
 
-        VWState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    private void showStatesDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final String[] states = getResources().getStringArray(R.array.States);
+        builder.setItems(states,new DialogInterface.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onClick(DialogInterface dialogInterface, int i) {
                 String selectedState;
-                selectedState = (String)(VWState.getSelectedItem());
+                selectedState = states[i];
                 billDetailsDataStore.unselectOldState();
                 billDetailsDataStore.updateSelectedState(selectedState);
                 ClearInputElements();
+                InitializeTitle();
                 InitializeFromUnits();
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
         });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void ClearInputElements() {
-        VWfromUnits.setText("");
-        VWtoUnits.setText("");
+        VWFromUnits.setText("");
+        VWToUnits.setText("");
     }
 
     private void InitializeViewElements() {
-        InitiazeStatesSpinner();
         InitializeFromUnits();
+        InitializeTitle();
     }
+
+    private void InitializeTitle() {
+        String titlePrefix = getResources().getString(R.string.title);
+        String selectedState = billDetailsDataStore.getSelectedState();
+        ((TextView)VWTitle).setText(titlePrefix + " " + selectedState);
+    }
+
     private void InitializeFromUnits() {
             int fromUnits = billDetailsDataStore.getFromUnitsForSelectedState();
             if(fromUnits!=0)
-            VWfromUnits.setText(Integer.toString(fromUnits));
+            VWFromUnits.setText(Integer.toString(fromUnits));
     }
 
     private void updateBillRates() {
         String selectedState = billDetailsDataStore.getSelectedState();
         String url = "http://guarded-badlands-3707.herokuapp.com/"+selectedState;
         new calculateAsyncTask(activityClassObject).execute(url);
-    }
-
-    private void InitiazeStatesSpinner() {
-     ArrayAdapter<CharSequence> statesArray= ArrayAdapter.createFromResource(this,R.array.States, android.R.layout.simple_spinner_item);
-     statesArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-     VWState.setAdapter(statesArray);
+        toastShow(this.getApplicationContext(),"Bill rates updated for "+selectedState);
     }
 
     private void InitializeDatabase() {
@@ -110,16 +131,15 @@ public class Calculator extends Activity implements ICallback{
     }
 
     private void CreateViewElements() {
-        VWsubmit = (Button) findViewById(R.id.submit);
-        VWfromUnits = (EditText) findViewById(R.id.textFromUnit);
-        VWtoUnits = (EditText) findViewById(R.id.textToUnits);
-        VWUpdate=(Button) findViewById(R.id.update);
-        VWState=(Spinner) findViewById(R.id.spinner);
+        VWSubmit = (Button) findViewById(R.id.submit);
+        VWFromUnits = (EditText) findViewById(R.id.textFromUnit);
+        VWToUnits = (EditText) findViewById(R.id.textToUnits);
+        VWTitle = findViewById(R.id.titleWithState);
     }
 
     private void setFieldsFromView() {
-        fromUnits = Integer.valueOf(VWfromUnits.getText().toString());
-        toUnits = Integer.valueOf(VWtoUnits.getText().toString());
+        fromUnits = Integer.valueOf(VWFromUnits.getText().toString());
+        toUnits = Integer.valueOf(VWToUnits.getText().toString());
     }
 
     private float getBill(Integer fromUnits, Integer toUnits) throws JSONException {
@@ -130,12 +150,12 @@ public class Calculator extends Activity implements ICallback{
 
     private void validateInput(View view) {
         if(fromUnits<0 || toUnits<0 || fromUnits>toUnits){
-            toastShow(view,"Invalid input");
+            toastShow(view.getContext(),"Invalid input");
         }
     }
 
-    private void toastShow(View view,String displayText) {
-        Toast bill = Toast.makeText(view.getContext(), displayText, 1000);
+    private void toastShow(Context context,String displayText) {
+        Toast bill = Toast.makeText(context, displayText, 1000);
         bill.show();
     }
 

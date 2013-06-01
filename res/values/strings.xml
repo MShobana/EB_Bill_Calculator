@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">EB_Bill_Calculator</string>
+    <string name="title">Calculating bill for </string>
 </resources>
